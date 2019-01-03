@@ -1,0 +1,41 @@
+name:                awesome
+version:             0.1.0.0
+github:              "githubuser/awesome"
+license:             MPL-2.0 
+author:              "Aeon"
+maintainer:          "aeon.git@gmail.com"
+copyright:           "2019 Aeon <aeon.git@gmail.com>"
+
+extra-source-files:
+- README.md
+- LICENSE
+
+description: Please see the README on GitHub at <https://github.com/gribouille/awesome#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+
+executables:
+  awesome-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - awesome
+
+tests:
+  awesome-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - awesome
