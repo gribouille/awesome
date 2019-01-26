@@ -1,10 +1,10 @@
 name:                awesome
 version:             0.1.0.0
-github:              "githubuser/awesome"
+github:              "gribouille/awesome"
 license:             MPL-2.0 
-author:              "Aeon"
-maintainer:          "aeon.git@gmail.com"
-copyright:           "2019 Aeon <aeon.git@gmail.com>"
+author:              "gribouille"
+maintainer:          "gribouille.git@gmail.com"
+copyright:           "2019 Gribouille <gribouille.git@gmail.com>"
 
 extra-source-files:
 - README.md
@@ -14,9 +14,23 @@ description: Please see the README on GitHub at <https://github.com/gribouille/a
 
 dependencies:
 - base >= 4.7 && < 5
+- optparse-applicative >= 0.14
+- directory >= 1.3
+- aeson >= 1.4
+- bytestring >= 0.10
+- req >= 1.2
+- http-client >= 0.5
+- text >= 1.2
+- transformers >= 0.3
+- data-default
+- split >= 0.2
+- async >= 2.2
+- pretty-terminal >= 0.1
 
 library:
   source-dirs: src
+  exposed-modules:
+    - Awesome
 
 executables:
   awesome-exe:
@@ -29,13 +43,3 @@ executables:
     dependencies:
     - awesome
 
-tests:
-  awesome-test:
-    main:                Spec.hs
-    source-dirs:         test
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - awesome
