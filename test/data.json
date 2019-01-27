@@ -1,0 +1,58 @@
+{
+  "title": "Title 1",
+  "description": "Description 1",
+  "categories": [
+    {
+      "title": "Sub Title 1.1",
+      "categories": [
+        {
+          "title" : "Sub Sub title 1.1.1",
+          "description": "Description 1.1.1.",
+          "items": [
+            {"url": "ajenti/ajenti"},
+            {"url": "http://djangosuit.com/", "name": "django-suit", "description": "Alternative Django Admin-Interface (free only for Non-commercial use)."},
+            {"url": "sshwsfc/xadmin_blablabla"},
+            {"url": "https://weekly.codetengu.com", "name": "CodeTengu Weekly 碼天狗週刊"},
+            {"url": "http://grappelliproject.com", "name": "Grappelli", "description": "A jazzy skin for the Django Admin-Interface."},
+            {"url": "wooey/wooey"}
+          ]
+        },
+        {
+          "title" : "Algorithms and Design Patterns",
+          "description": "Python implementation of algorithms and design patterns.",
+          "items": [
+            {"url": "keon/algorithms"},
+            {"url": "tylerlaberge/PyPattyrn"},
+            {"url": "faif/python-patterns"},
+            {"url": "http://www.grantjenks.com/docs/sortedcontainers/", "name": "sortedcontainers", "description": "Fast, pure-Python implementation of SortedList, SortedDict, and SortedSet types."}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Services",
+      "description": "Online tools and APIs to simplify development.",
+      "categories": [
+        {
+          "title" : "Continuous Integration",
+          "description": "See: [awesome-CIandCD](https://github.com/ciandcd/awesome-ciandcd#online-build-system).",
+          "items": [
+            {"url": "https://circleci.com/", "name": "CircleCI", "description": "A CI service that can run very fast parallel testing. (GitHub only)"},
+            {"url": "https://travis-ci.org", "name": "Travis CI", "description": "A popular CI service for your open source and [private](https://travis-ci.com) projects. (GitHub only)"},
+            {"url": "https://vexor.io", "name": "Vexor CI", "description": "A continuous integration tool for private apps with pay-per-minute billing model."},
+            {"url": "http://www.wercker.com/", "name": "Wercker", "description": "A Docker-based platform for building and deploying applications and microservices."}
+          ]
+        },
+        {
+          "title" : "Code Quality",
+          "items": [
+            {"url": "https://www.codacy.com/", "name": "Codacy", "description": "Automated Code Review to ship better code, faster."},
+            {"url": "https://codecov.io/", "name": "Codecov", "description": "Code coverage dashboard."},
+            {"url": "https://www.codefactor.io/", "name": "CodeFactor", "description": "Automated Code Review for Git."},
+            {"url": "https://landscape.io/", "name": "Landscape", "description": "Hosted continuous Python code metrics."}
+          ]
+        }
+      ]
+    }
+  ]
+}

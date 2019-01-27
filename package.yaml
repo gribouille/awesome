@@ -27,6 +27,7 @@ dependencies:
 - async >= 2.2
 - pretty-terminal >= 0.1
 - time >= 1.8 && < 2
+- text-format >= 0.3
 
 library:
   source-dirs: src
