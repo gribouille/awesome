@@ -38,7 +38,10 @@ instance Show Link where
           else 
             printf "[[%s](%s)] " license urlLicense :: String
   show ExternLink{..} = 
-    printf "* [%s](%s) - %s\n" title url desc
+    if desc == "" then
+      printf "* [%s](%s)\n" title url
+    else
+      printf "* [%s](%s) - %s\n" title url desc
 
 
 -- GithubLink links priority and ordered by stars.

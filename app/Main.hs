@@ -7,6 +7,8 @@ import           Data.Semigroup         ((<>))
 import           Options.Applicative
 import           Debug.Trace
 import qualified Data.ByteString.Char8  as BC
+import qualified Data.Time.Clock.System as Time
+import qualified Data.Time.Clock        as Clock
 import qualified Awesome
 
 
@@ -51,5 +53,7 @@ main =
 start :: Options -> IO ()
 start Version = putStrLn version
 start Options {..} = do
+  a <- Time.getSystemTime
   Awesome.awesome token source output 
-  putStrLn "End."
+  b <- Time.getSystemTime
+  putStrLn $ "\nFinished in " ++ show (Clock.diffUTCTime (Time.systemToUTCTime b) (Time.systemToUTCTime a))

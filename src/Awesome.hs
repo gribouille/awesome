@@ -6,22 +6,22 @@ module Awesome (awesome) where
 import           Data.Functor
 import           Data.Traversable
 import           Control.Monad
-import qualified Data.Text              as T
-import qualified Data.ByteString        as B
-import qualified Data.ByteString.Char8  as BC
-import           Data.Char              (toLower)
-import           Data.List              (sortOn)
-import           Data.Ord               (Down (..))
-import           Data.List.Split        (splitOn)
-import           Data.Maybe             (fromMaybe, catMaybes)
-import           System.IO              (Handle, IOMode (..), hClose, hFlush,
-                                         hPutStr, openFile)
-import           Text.Printf            (printf)
+import qualified Data.Text                as T
+import qualified Data.ByteString          as B
+import qualified Data.ByteString.Char8    as BC
+import           Data.Char                (toLower)
+import           Data.List                (sortOn)
+import           Data.Ord                 (Down (..))
+import           Data.List.Split          (splitOn)
+import           Data.Maybe               (fromMaybe, catMaybes)
+import           System.IO                (Handle, IOMode (..), hClose, hFlush,
+                                           hPutStr, openFile)
+import           Text.Printf              (printf)
 import qualified Control.Concurrent.Async as Async
-
-import qualified Awesome.Github as Github
-import qualified Awesome.Markdown as MD
-import qualified Awesome.Config as Config
+import qualified Data.Time.LocalTime      as Time
+import qualified Awesome.Github           as Github
+import qualified Awesome.Markdown         as MD
+import qualified Awesome.Config           as Config
 
 
 -- Entry point to convert the JSON file to Markdown.
@@ -61,7 +61,7 @@ itemToLink token (Config.Item u n d) =
   if Config.isGithub u then
     githubRequest token u
   else
-    return $ n >>= (\title -> d <&> MD.ExternLink title u)
+    return $ n >>= (\title -> Just $ MD.ExternLink title u (fromMaybe "" d))
 
 
 --
@@ -86,13 +86,13 @@ itemsToLinksAsync' token =
 writeCategoryToFile :: Github.Token -> FilePath -> Config.Category -> IO ()
 writeCategoryToFile token file cat = do
   h <- openFile file WriteMode
-  putStrLn "Write header..."
+  putStrLn "awesome list generation"
+  putStrLn "======================="
   hPutStr h $ showCategoryHeader cat
-  putStrLn "Write Table Of Content..."
   hPutStr h "\n\n"
   forM_ (Config.categories cat) $ writeTOC h 0
-  putStrLn "Write Categories..."
   forM_ (Config.categories cat) $ writeCategories token h 2
+  writeFooter h
   hClose h
 
 
@@ -146,3 +146,8 @@ showCategoryHeader cat =
       d = fromMaybe "" $ Config.description (cat :: Config.Category)
 
 
+writeFooter :: Handle -> IO ()
+writeFooter h = do
+  t <- Time.getZonedTime
+  hPutStr h $ "\n\n\n_List generated with [awesome](https//github.com/gribouille/awesome)"
+    ++ " at " ++ show t ++ "._"
