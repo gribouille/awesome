@@ -27,12 +27,25 @@ import           Data.Traversable
 import           Prelude                  hiding (hPutStr, putStrLn)
 import           System.IO                (Handle, IOMode (..), hClose, hFlush,
                                            openFile)
+import qualified System.Directory as Dir
+import           System.FilePath.Posix    ((</>), takeDirectory)
+import qualified Paths_awesome
 
 
 -- Entry point to convert the JSON file to Markdown.
 awesome :: Github.Token -> FilePath -> FilePath -> IO ()
 awesome token src dst =
-  Config.read src (writeCategoryToFile token dst)
+  Config.read src (writeCategoryToFile token dst) 
+    >> Dir.makeAbsolute dst >>= (\s -> copyAssets (takeDirectory s))
+
+-- Copy asset images in the output directory.
+copyAssets :: FilePath -> IO ()
+copyAssets outputDir = do
+  Dir.createDirectoryIfMissing False destDir
+  Paths_awesome.getDataFileName "assets/star.png" >>= flip Dir.copyFile (destDir </> "star.png")
+  Paths_awesome.getDataFileName "assets/license.png" >>= flip Dir.copyFile (destDir </> "license.png") 
+  where
+    destDir = outputDir </> "assets"
 
 
 -- Get the owner/repo info from the url.
